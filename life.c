@@ -7,7 +7,7 @@ int globalHeight;
 
 const int REINCARNATE = 3;
 const int MIN_STAY_ALIVE = 2;
-const int MAX_STAY_ALIZE = 3;
+const int MAX_STAY_ALIVE = 3;
 
 void initialize(int* resWidth, int* resHeight, char** addrT) {
   char* resT;
@@ -50,7 +50,7 @@ void move_all_t_bits_left() {
 }
 
 int get_new_value(int index, int n_sum) {
-  return ((globalT[index] & 1) && (n_sum <= MAX_STAY_ALIZE || n_sum >= MIN_STAY_ALIVE)) || ((globalT[index] ^ 1) && n_sum == 3);
+  return ((globalT[index] >> 1 & 1) && (n_sum <= MAX_STAY_ALIVE || n_sum >= MIN_STAY_ALIVE)) || ((globalT[index] >> 1 ^ 1) && n_sum == 3);
 }
 
 int get_cell_neighbours_value(int col, int row) {
@@ -60,10 +60,10 @@ int get_cell_neighbours_value(int col, int row) {
     for (int w = -1; w <= 1; w++) {
       int w_index = w + col;
       int h_index = h + row;
-      if ((w_index < 0 || w_index >= globalWidth) || (h_index < 0 || h_index >= globalHeight) || (w_index == 0 && h_index == 0)) {
+      if ((w_index < 0 || w_index >= globalWidth) || (h_index < 0 || h_index >= globalHeight) || (w == 0 && h == 0)) {
         continue;
       }
-      n_value += globalT[globalWidth * (row + h) + w + col] >> 1 & 1;
+      n_value += globalT[globalWidth * h_index + w_index] >> 1 & 1;
     }
   }
 
@@ -75,7 +75,8 @@ void run_one_step() {
     for (int j = 0; j < globalWidth; j++) {
       int value = get_cell_neighbours_value(j, i);
       int position = i * globalWidth + j;
-      globalT[position] |= get_new_value(position, value);
+      int new_value = get_new_value(position, value);
+      globalT[position] |= new_value;
     }
   }
 
