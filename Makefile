@@ -1,8 +1,5 @@
 all: life
 
-# hello: try-hello.c hello.o
-# 	gcc -o hello try-hello.c hello.o
-
 life: life.c game.o
 	gcc -o life life.c game.o
 
@@ -18,4 +15,4 @@ life: life.c game.o
 
 
 clean:
-	rm -f *.o
+	rm -f *.o life

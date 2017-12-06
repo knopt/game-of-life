@@ -13,12 +13,12 @@ const int MAX_STAY_ALIVE = 3;
 
 void initialize(int* resWidth, int* resHeight, int* step_number, char** addrT) {
   char* resT;
+  printf("number of steps:\n");
+  scanf("%d", step_number);
   printf("width: \n");
   scanf("%d", resWidth);
   printf("height: \n");
   scanf("%d", resHeight);
-  printf("step number:\n");
-  scanf("%d", step_number);
 
   int height = *resHeight;
   int width = *resWidth;
