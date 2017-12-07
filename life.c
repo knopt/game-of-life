@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// C functions, to show how assembly funtions are implemented
+// C functions, to show how assembler funtions are implemented
 
 char* globalT;
 int globalWidth;
